@@ -19,7 +19,6 @@ namespace TaidouCommon.Tools
             return JsonMapper.ToObject<T>(o.ToString());
         }
 
-
         //将key,value存储到字典中
         public static void AddParameter<T>( Dictionary<byte, object> parameters, ParameterCode key, T value,
             bool isObject = true)
@@ -36,12 +35,14 @@ namespace TaidouCommon.Tools
             }
         }
 
+        //取出子操作
         public static SubCode GetSubCode(Dictionary<byte,object> parameters )
         {
             SubCode subcode=GetParameter<SubCode>(parameters,ParameterCode.SubCode,false);
             return subcode; 
         }
 
+        //添加子操作
         public static void AddSubCode(Dictionary<byte,object> parameters,SubCode subcode )
         {
             AddParameter<SubCode>(parameters,ParameterCode.SubCode, subcode,false);

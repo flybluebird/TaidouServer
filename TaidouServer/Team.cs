@@ -9,6 +9,7 @@ namespace TaidouServer
     public class Team
     {
         public List<ClientPeer> ClientPeers=new List<ClientPeer>();
+        public int masterRoleID = 0;
 
         public Team()
         {
@@ -22,6 +23,8 @@ namespace TaidouServer
             peer1.team = this;
             peer2.team = this;
             peer3.team = this;
+
+            masterRoleID = peer3.LoginRole.ID;
         }
     }
 }

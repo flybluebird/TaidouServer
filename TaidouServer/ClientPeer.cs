@@ -47,6 +47,10 @@ namespace TaidouServer
         //失去连接时，处理的事项
         protected override void OnDisconnect(DisconnectReason reasonCode, string reasonDetail)
         {
+            if (TaidouServer.Instance.clientPeersForTeam.Contains(this))
+            {
+                TaidouServer.Instance.clientPeersForTeam.Remove(this);
+            }
             log.Debug("a client is disconnect!"+reasonCode);
         } 
     }

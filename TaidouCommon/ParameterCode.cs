@@ -12,12 +12,16 @@ namespace TaidouCommon
         RoleList,
         Role,
         SubCode,
+        OperationCode,
         TaskDB,
         TaskDBList,
         InventoryDBList,
         InventoryDB,
         SkillDB,
         SkillDBList,
-        
+        MasterRoleID,
+        Position,//位置
+        EulerAngles,//旋转
+        RoleID
     }
 }

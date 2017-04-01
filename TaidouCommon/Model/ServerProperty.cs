@@ -12,3 +12,4 @@ namespace TaidouCommon.Model
         public virtual int Count { get; set; }
     }
 }
+ 
