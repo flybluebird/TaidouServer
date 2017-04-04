@@ -9,22 +9,21 @@ namespace TaidouServer
     public class Team
     {
         public List<ClientPeer> ClientPeers=new List<ClientPeer>();
-        public int masterRoleID = 0;
+        public int masterRoleID = -1;
 
         public Team()
         {
         }
 
-        public Team(ClientPeer peer1,ClientPeer peer2,ClientPeer peer3)
+        public Team(ClientPeer peer1,ClientPeer peer2)
         {
             ClientPeers.Add(peer1);
             ClientPeers.Add(peer2);
-            ClientPeers.Add(peer3);
-            peer1.team = this;
-            peer2.team = this;
-            peer3.team = this;
 
-            masterRoleID = peer3.LoginRole.ID;
+            peer1.Team = this;
+            peer2.Team = this;
+            
+            masterRoleID = peer2.LoginRole.ID;
         }
     }
 }

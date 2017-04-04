@@ -17,6 +17,7 @@ namespace TaidouCommon
         TaskDB,
         InventoryDB,
         SkillDB,
-        Battle
+        Battle,
+        Enemy
     }
 }

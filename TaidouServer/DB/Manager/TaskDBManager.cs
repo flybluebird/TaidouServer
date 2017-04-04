@@ -16,8 +16,6 @@ namespace TaidouServer.DB.Manager
                 using (var transcation=session.BeginTransaction())
                 {
                     var res=session.QueryOver<TaskDB>().Where(x=>x.Role==role);
-                    TaidouServer.log.Debug(role.Name);
-                   
                     transcation.Commit();
                     //return (List<TaskDB>)res.List();
                     return  (List<TaskDB>)res.List<TaskDB>();

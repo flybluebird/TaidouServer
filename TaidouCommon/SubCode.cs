@@ -25,6 +25,8 @@ namespace TaidouCommon
         SendTeam,//组队的请求
         CancelTeam,//取消组队请求
         GetTeam,//组队成功
-        SyncPositionAndRotation//同步位置和旋转
+        SyncPositionAndRotation,//同步位置和旋转
+        SyncPlayerMoveAnimation,//同步角色动画
+        CreateEnemy//创建敌人
     }
 }

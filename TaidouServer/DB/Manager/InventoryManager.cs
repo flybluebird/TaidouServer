@@ -69,7 +69,7 @@ namespace TaidouServer.DB.Manager
             {
                 using (var transaction=session.BeginTransaction())
                 {
-                    TaidouServer.log.Debug("跟新装备！");
+                   
                     session.Update(itemdb2);
                     session.Update(role2);
                     transaction.Commit();

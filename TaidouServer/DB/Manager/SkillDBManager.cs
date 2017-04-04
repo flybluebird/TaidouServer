@@ -40,7 +40,6 @@ namespace TaidouServer.DB.Manager
             {
                 using (var transaction=session.BeginTransaction())
                 {
-                    TaidouServer.log.Debug(skilldb.Level);
                     session.SaveOrUpdate(skilldb);
                     session.Update(role);
                     transaction.Commit();
@@ -56,10 +55,6 @@ namespace TaidouServer.DB.Manager
                 {
                     var res=session.QueryOver<SkillDB>().Where(x=>x.Role==role);
                     transaction.Commit();
-                    foreach (var temp in res.List<SkillDB>())
-                    {
-                        TaidouServer.log.Debug(temp.ID);
-                    }
                     return (List<SkillDB>) res.List<SkillDB>(); 
                 }
             }

@@ -86,6 +86,7 @@
     <Compile Include="DB\Mapping\UserMap.cs" />
     <Compile Include="DB\NhibernateHelper.cs" />
     <Compile Include="Handlers\BattleHandler.cs" />
+    <Compile Include="Handlers\EnemyHandler.cs" />
     <Compile Include="Handlers\HandlerBase.cs" />
     <Compile Include="Handlers\InventoryDBHandler.cs" />
     <Compile Include="Handlers\LoginHandler.cs" />

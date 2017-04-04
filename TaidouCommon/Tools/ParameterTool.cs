@@ -20,7 +20,7 @@ namespace TaidouCommon.Tools
         }
 
         //将key,value存储到字典中
-        public static void AddParameter<T>( Dictionary<byte, object> parameters, ParameterCode key, T value,
+        public static void AddParameter<T>(Dictionary<byte, object> parameters, ParameterCode key, T value,
             bool isObject = true)
         {
             if (isObject)
@@ -46,6 +46,25 @@ namespace TaidouCommon.Tools
         public static void AddSubCode(Dictionary<byte,object> parameters,SubCode subcode )
         {
             AddParameter<SubCode>(parameters,ParameterCode.SubCode, subcode,false);
+        }
+
+        public static void AddOperationCodeSubCodeRoleId(Dictionary<byte,object> parameters,OperationCode operationCode,SubCode subCode,int RoleId)
+        {
+            if (parameters.ContainsKey((byte) ParameterCode.OperationCode))
+            {
+                parameters.Remove((byte) ParameterCode.OperationCode);
+            }
+            if (parameters.ContainsKey((byte) ParameterCode.SubCode))
+            {
+                parameters.Remove((byte) ParameterCode.SubCode);
+            }
+            if (parameters.ContainsKey((byte) ParameterCode.RoleID))
+            {
+                parameters.Remove((byte) ParameterCode.RoleID);
+            }
+            parameters.Add((byte) ParameterCode.OperationCode,operationCode);
+            parameters.Add((byte) ParameterCode.SubCode,subCode);
+            parameters.Add((byte) ParameterCode.RoleID,RoleId);
         }
     }
 }

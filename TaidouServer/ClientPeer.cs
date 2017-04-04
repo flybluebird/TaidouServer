@@ -18,7 +18,7 @@ namespace TaidouServer
     {
         public User LoginUser { get; set; }//存储当前登录的user的账号 
         public Role LoginRole { get; set; }//存储当前登陆的角色
-        public Team team { get; set; }
+        public Team Team { get; set; }
 
         private static readonly ILogger log = ExitGames.Logging.LogManager.GetCurrentClassLogger();
 
@@ -51,7 +51,7 @@ namespace TaidouServer
             {
                 TaidouServer.Instance.clientPeersForTeam.Remove(this);
             }
-            log.Debug("a client is disconnect!"+reasonCode);
+            log.Debug("a client is disconnect!"+reasonCode+"this client is:"+this);
         } 
     }
 }

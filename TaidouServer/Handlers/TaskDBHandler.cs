@@ -40,7 +40,6 @@ namespace TaidouServer.Handlers
                     List<TaskDB> list = taskdbManager.GetTaskDbList(peer.LoginRole);
                     foreach (var taskdbtemp in list)
                     {
-                        TaidouServer.log.Debug(taskdbtemp.TaskID);
                         taskdbtemp.Role = null;
                     }
                     ParameterTool.AddParameter(response.Parameters, ParameterCode.TaskDBList, list);

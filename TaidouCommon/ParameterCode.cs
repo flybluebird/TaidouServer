@@ -22,6 +22,8 @@ namespace TaidouCommon
         MasterRoleID,
         Position,//位置
         EulerAngles,//旋转
-        RoleID
+        RoleID,
+        PlayerMoveAnimationModel,
+        CreateEnemyModel 
     }
 }
