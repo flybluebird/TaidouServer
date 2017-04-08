@@ -8,6 +8,7 @@ using Photon.SocketServer;
 using TaidouCommon;
 using TaidouCommon.Model;
 using TaidouCommon.Tools;
+using TaidouServer.Tools;
 
 namespace TaidouServer.Handlers
 {
@@ -17,7 +18,6 @@ namespace TaidouServer.Handlers
         {
             SubCode subcode=ParameterTool.GetSubCode(request.Parameters);
             ParameterTool.AddSubCode(response.Parameters,subcode);
-            
             switch (subcode)
             {
                 case SubCode.SendTeam:
@@ -26,8 +26,7 @@ namespace TaidouServer.Handlers
                         //取得集合中的前两个peer，和当前的peer进行组队
                         ClientPeer peer1 = TaidouServer.Instance.clientPeersForTeam[0];
                         Team t = new Team(peer1, peer);
-                        //TaidouServer.Instance.clientPeersForTeam.RemoveRange(0, 1);
-                        TaidouServer.log.Debug("当前游戏中的角色有："+peer1.LoginRole.Name+"---"+peer.LoginRole.Name+peer.LoginRole.ID);
+                        TaidouServer.Instance.clientPeersForTeam.RemoveRange(0, 1);
                         List<Role> rolelist=new List<Role>();
                         foreach (var clientPeer in t.ClientPeers)
                         {
@@ -38,7 +37,7 @@ namespace TaidouServer.Handlers
                         response.ReturnCode = (short) ReturnCode.GetTeam;
              
                         SendEventByPeer(peer1, (OperationCode) response.OperationCode,SubCode.GetTeam, rolelist,t.masterRoleID);
-                        
+                       
                     }
                     else 
                     {
@@ -56,36 +55,25 @@ namespace TaidouServer.Handlers
                     request.Parameters.TryGetValue((byte) ParameterCode.Position, out objPos);
                     object objEulerAngle = null;
                     request.Parameters.TryGetValue((byte)ParameterCode.EulerAngles,out objEulerAngle);
-                   
+
                     foreach (ClientPeer temp in peer.Team.ClientPeers)
                     {
                         //向其余的客户端发送请求
-                        if (temp!= peer)
+                        if (temp != peer)
                         {
-                            SendPositionAndRotation(temp,OpCode,SubCode.SyncPositionAndRotation,peer.LoginRole.ID, objPos, objEulerAngle);
+                            SendPositionAndRotation(temp, OpCode, SubCode.SyncPositionAndRotation, peer.LoginRole.ID, objPos, objEulerAngle);
                         }
                     }
+                
                     break;
                 case SubCode.SyncPlayerMoveAnimation:
                     
-                    foreach (ClientPeer temp in peer.Team.ClientPeers)
-                    {
-                        if (temp != peer)
-                        {
-                            SendPlayerMoveAnimationEvent(temp,OpCode,SubCode.SyncPlayerMoveAnimation,peer.LoginRole.ID,request.Parameters);
-                        }
-                    }
+                    RequestTool.TransmitRequest(peer,request,OpCode);
+                    break;
+                case SubCode.SyncPlayerAnimation:
+                    RequestTool.TransmitRequest(peer,request,OpCode);
                     break;
             }
-        }
-
-        //同步角色动画
-        void SendPlayerMoveAnimationEvent(ClientPeer peer,OperationCode operationCode,SubCode subCode,int roleId,Dictionary<byte,object> parameters )
-        {
-            EventData eventData=new EventData();
-            eventData.Parameters = parameters;
-            ParameterTool.AddOperationCodeSubCodeRoleId(eventData.Parameters,operationCode,subCode,roleId);
-            peer.SendEvent(eventData, new SendParameters());
         }
 
         //向客户端发送同步的位置和旋转进行同步

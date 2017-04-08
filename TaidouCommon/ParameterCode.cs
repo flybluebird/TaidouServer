@@ -24,6 +24,9 @@ namespace TaidouCommon
         EulerAngles,//旋转
         RoleID,
         PlayerMoveAnimationModel,
-        CreateEnemyModel 
+        PlayerAnimationModel,
+        CreateEnemyModel,
+        SyncEnemyPositionModel,
+        SyncEnemyAnimationModel
     }
 }

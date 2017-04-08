@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Photon.SocketServer;
 using TaidouCommon;
 using TaidouCommon.Tools;
+using TaidouServer.Tools;
 
 namespace TaidouServer.Handlers
 {
@@ -18,20 +19,19 @@ namespace TaidouServer.Handlers
 
             switch (subcode)
             {
-                case SubCode.CreateEnemy:
-                    foreach (var temp in peer.Team.ClientPeers)
-                    {
-                        if (temp != peer)
-                        {
-                            EventData eventData=new EventData();
-                            eventData.Parameters = request.Parameters;
-                            ParameterTool.AddOperationCodeSubCodeRoleId(eventData.Parameters,OpCode,subcode,peer.LoginRole.ID);
-                            temp.SendEvent(eventData, new SendParameters());
-                        }
-                    }
+                case SubCode.CreateEnemy: 
+                    RequestTool.TransmitRequest(peer,request,OpCode);
+                    break;
+                case SubCode.SyncEnemyPosition:
+                    RequestTool.TransmitRequest(peer, request, OpCode);
+                    break;
+                case SubCode.SyncEnemyAnimation:
+                    RequestTool.TransmitRequest(peer, request, OpCode);
                     break;
             }
         }
+
+        
 
         public override OperationCode OpCode {
             get { return OperationCode.Enemy;} 

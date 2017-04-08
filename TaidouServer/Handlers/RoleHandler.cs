@@ -49,9 +49,11 @@ namespace TaidouServer.Handlers
                     
                     break;
                 case SubCode.SelectRole:
+                    //将客户端选择的角色发送给服务器
                     peer.LoginRole=ParameterTool.GetParameter<Role>(request.Parameters,ParameterCode.Role);
+                    TaidouServer.log.Debug(peer.LoginRole.Name+"----"+peer.LoginRole.ID);
                     break;
-                    case SubCode.UpdateRole:
+                case SubCode.UpdateRole:
                     Role role2=ParameterTool.GetParameter<Role>(request.Parameters,ParameterCode.Role);
                     role2.User = peer.LoginUser;
                     manager.UpdateRole(role2);

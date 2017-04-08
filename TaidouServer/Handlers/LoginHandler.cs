@@ -31,9 +31,9 @@ namespace TaidouServer.Handlers
         {
             
             Dictionary<byte, object> parameters = request.Parameters;
-            object jsonObject=null;
-            parameters.TryGetValue((byte)ParameterCode.User,out jsonObject);
-            User user=JsonMapper.ToObject<User>(jsonObject.ToString());
+            object userObj=null;
+            parameters.TryGetValue((byte)ParameterCode.User,out userObj);
+            User user=JsonMapper.ToObject<User>(userObj.ToString());
             //由名字得到数据库中的user对象
             User userDB=manager.GetUserByUsername(user.Username);
             //数据库中存在对象，并且密码输入正确

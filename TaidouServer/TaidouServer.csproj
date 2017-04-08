@@ -99,6 +99,7 @@
     <Compile Include="TaidouServer.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Tools\MD5Tools.cs" />
+    <Compile Include="Tools\RequestTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config">
